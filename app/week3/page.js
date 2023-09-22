@@ -6,7 +6,7 @@ export default function Page () {
     <main>
         <h1>Shopping List</h1>
         <ItemList/>
-        <Link href="/">Home</Link>
+        <Link href="/" className="text-orange-700">Home</Link>
     </main>
     );
 }
