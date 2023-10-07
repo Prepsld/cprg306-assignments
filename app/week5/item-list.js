@@ -1,5 +1,4 @@
-"use client"; // Assuming this is specific to your project setup
-
+"use client";
 // Import necessary modules and components
 import { useState } from "react";
 import Link from 'next/link';
@@ -8,47 +7,89 @@ import items from './items.json'; // Import the JSON data containing items
 
 // Define the ItemList component
 function ItemList() {
-  // Create a state variable 'sortBy' and its setter function 'setSortBy' using useState
-  const [sortBy, setSortBy] = useState('name');
+  // State variables
+  const [sortBy, setSortBy] = useState('name'); // Sorting preference
+  const [groupBy, setGroupBy] = useState(false); // Grouping toggle
 
-  // Sort the items array based on the 'sortBy' state variable
+  // Sort items based on sorting preference
   const sortedItems = [...items].sort((a, b) => {
-    // If 'sortBy' is 'name', sort items by their 'name' property
     if (sortBy === 'name') {
+      // Sort by name
       return a.name.localeCompare(b.name);
-    }
-    // If 'sortBy' is 'category', sort items by their 'category' property
-    else if (sortBy === 'category') {
+    } else if (sortBy === 'category') {
+      // Sort by category
       return a.category.localeCompare(b.category);
     }
-    // Return 0 if no sorting preference is specified
+    // No sorting preference specified
     return 0;
   });
 
+  // Group and sort items by category when grouping is enabled
+  const groupedItems = groupBy
+    ? sortedItems.reduce((acc, currentItem) => {
+        const category = currentItem.category;
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(currentItem);
+        return acc;
+      }, {})
+    : { default: [...sortedItems] }; // Default category for non-grouped items
+
   // Render the component
   return (
-    <div>
-      <div>
-        {/* Button to set 'sortBy' to 'name' */}
+    <div className="bg-gray-900 text-white p-4">
+      <div className="flex justify-between items-center">
+        {/* Sorting and grouping buttons */}
         <button
-          onClick={() => setSortBy('name')}
-          style={{ backgroundColor: sortBy === 'name' ? 'lightblue' : 'white' }}
+          onClick={() => {
+            setSortBy('name');
+            setGroupBy(false); // Disable grouping when sorting by name
+          }}
+          className={`py-2 px-4 rounded ${
+            sortBy === 'name' ? 'bg-blue-500 text-white' : 'bg-white text-black'
+          }`}
         >
           Sort by Name
         </button>
-        {/* Button to set 'sortBy' to 'category' */}
         <button
-          onClick={() => setSortBy('category')}
-          style={{ backgroundColor: sortBy === 'category' ? 'lightblue' : 'white' }}
+          onClick={() => {
+            setSortBy('category');
+            setGroupBy(false); // Disable grouping when sorting by category
+          }}
+          className={`py-2 px-4 rounded ${
+            sortBy === 'category' ? 'bg-blue-500 text-white' : 'bg-white text-black'
+          }`}
         >
           Sort by Category
         </button>
+        <button
+          onClick={() => setGroupBy(!groupBy)}
+          className={`py-2 px-4 rounded ${
+            groupBy ? 'bg-blue-500 text-white' : 'bg-white text-black'
+          }`}
+        >
+          Group by Category
+        </button>
       </div>
       <div>
-        {/* Map through sortedItems array and render Item component for each item */}
-        {sortedItems.map((item) => (
-          <Item key={item.id} item={item} />
-        ))}
+        {/* Render items based on the grouping state */}
+        {groupBy
+          ? Object.keys(groupedItems).map((category) => (
+              <div key={category}>
+                {/* Display category name capitalized */}
+                <h2 className="capitalize text-2xl mt-4">{category}</h2>
+                {/* Render items within the current category */}
+                {groupedItems[category].map((item) => (
+                  // Render the Item component for the current item
+                  <Item key={item.id} item={item} />
+                ))}
+              </div>
+            ))
+          : sortedItems.map((item) => (
+              // Render the Item component for each item when not grouping
+              <Item key={item.id} item={item} />
+            ))}
       </div>
     </div>
   );

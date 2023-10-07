@@ -1,13 +1,17 @@
-export default function Item ({name, quantity, category}) {
-    return (
-    <div>
-        <ol>
-            <li className="text-red-300 bg-slate-800 border border-blue-800" >
-                <p className="text-red-800">Name: {name}</p>
-                <p>Quantity: {quantity}</p>
-                <p>Category: {category}</p>
-            </li>
-        </ol>
+export default function Item({ name, quantity, category }) {
+  return (
+    <div className="mb-4">
+      {/* Item container with border and padding */}
+      <div className="border border-blue-800 p-4 rounded-lg">
+        {/* Display the item's name */}
+        <p className="text-red-800">Name: {name}</p>
+
+        {/* Display the item's quantity */}
+        <p>Quantity: {quantity}</p>
+
+        {/* Display the item's category */}
+        <p>Category: {category}</p>
+      </div>
     </div>
-    );
+  );
 }
