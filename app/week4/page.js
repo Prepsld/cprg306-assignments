@@ -6,6 +6,7 @@ export default function Page()
     return (
         <main>
             <NewItem/>
+            <Link href="/" className="text-orange-700">Home</Link>
         </main>
     );
 }
