@@ -7,7 +7,7 @@ export default function NewItem() {
   // State variables for item details
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState('produce');
+  const [category, setCategory] = useState("produce");
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -25,9 +25,9 @@ export default function NewItem() {
     alert(`Name: ${item.name}\nQuantity: ${item.quantity}\nCategory: ${item.category}`);
 
     // Reset form fields to default values
-    setName('');
+    setName("");
     setQuantity(1);
-    setCategory('produce');
+    setCategory("produce");
   }
 
   // Render the component

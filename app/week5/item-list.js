@@ -8,15 +8,15 @@ import items from './items.json'; // Import the JSON data containing items
 // Define the ItemList component
 function ItemList() {
   // State variables
-  const [sortBy, setSortBy] = useState('name'); // Sorting preference
+  const [sortBy, setSortBy] = useState("name"); // Sorting preference
   const [groupBy, setGroupBy] = useState(false); // Grouping toggle
 
   // Sort items based on sorting preference
   const sortedItems = [...items].sort((a, b) => {
-    if (sortBy === 'name') {
+    if (sortBy === "name") {
       // Sort by name
       return a.name.localeCompare(b.name);
-    } else if (sortBy === 'category') {
+    } else if (sortBy === "category") {
       // Sort by category
       return a.category.localeCompare(b.category);
     }
@@ -43,22 +43,22 @@ function ItemList() {
         {/* Sorting and grouping buttons */}
         <button
           onClick={() => {
-            setSortBy('name');
+            setSortBy("name");
             setGroupBy(false); // Disable grouping when sorting by name
           }}
           className={`py-2 px-4 rounded ${
-            sortBy === 'name' ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            sortBy === "name" ? "bg-blue-500 text-white" : "bg-white text-black"
           }`}
         >
           Sort by Name
         </button>
         <button
           onClick={() => {
-            setSortBy('category');
+            setSortBy("category");
             setGroupBy(false); // Disable grouping when sorting by category
           }}
           className={`py-2 px-4 rounded ${
-            sortBy === 'category' ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            sortBy === "category" ? "bg-blue-500 text-white" : "bg-white text-black"
           }`}
         >
           Sort by Category
@@ -66,7 +66,7 @@ function ItemList() {
         <button
           onClick={() => setGroupBy(!groupBy)}
           className={`py-2 px-4 rounded ${
-            groupBy ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            groupBy ? "bg-blue-500 text-white" : "bg-white text-black"
           }`}
         >
           Group by Category
