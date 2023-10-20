@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 function MealIdeas({ingredient}) {
     const [meals, setMeals] = useState([]);
     
-}
+
 
 async function fetchMealIdeas(ingredient) {
     try {
@@ -13,7 +13,8 @@ async function fetchMealIdeas(ingredient) {
         const data = await response.json();
         if (data && data.meals) {
             setMeals(data.meals);
-        }
+        } else {
+            setMeals([]);}
         
     } catch (error) {
         console.error(error);
@@ -35,5 +36,5 @@ return (
         </ul>
     </div>
 );
-
+}
 export default MealIdeas;

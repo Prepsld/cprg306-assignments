@@ -1,5 +1,5 @@
 // Define the Item component that receives an 'item' prop
-export default function Item({ item }) {
+export default function Item({ item, onSelect }) {
   // Destructure the 'item' prop to access its properties
   const { name, quantity, category } = item;
 
@@ -7,7 +7,10 @@ export default function Item({ item }) {
   return (
     <div>
       <ol>
-        <li className="text-red-300 bg-slate-800 border border-blue-800">
+        <li className="text-red-300 bg-slate-800 border border-blue-800" 
+          onClick={() => onSelect(item)}
+          style={{ cursor: "pointer" }} >
+
           {/* Display the item's name */}
           <p className="text-red-800">Name: {name}</p>
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Item from './item'; // Import the Item component
 
 // Define the ItemList component
-function ItemList({items}) {
+function ItemList({items, onItemSelect}) {
   // State variables
   const [sortBy, setSortBy] = useState("name"); // Sorting preference
   const [groupBy, setGroupBy] = useState(false); // Grouping toggle
@@ -80,13 +80,13 @@ function ItemList({items}) {
                 {/* Render items within the current category */}
                 {groupedItems[category].map((item) => (
                   // Render the Item component for the current item
-                  <Item key={item.id} item={item} />
+                  <Item key={item.id} item={item} onSelect={() => onItemSelect(item)} />
                 ))}
               </div>
             ))
           : sortedItems.map((item) => (
               // Render the Item component for each item when not grouping
-              <Item key={item.id} item={item} />
+              <Item key={item.id} item={item} onSelect={() => onItemSelect(item)} />
             ))}
       </div>
     </div>
